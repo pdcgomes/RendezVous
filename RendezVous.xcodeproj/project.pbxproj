@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		42D7AB781B6C1D0500731FDB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB771B6C1D0500731FDB /* main.swift */; };
 		42D7AB7F1B6C1D6D00731FDB /* LocalizedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */; };
-		42D7AB861B6C1DE000731FDB /* Merger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB851B6C1DE000731FDB /* Merger.swift */; };
+		42D7AB861B6C1DE000731FDB /* LocalizedFileMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB851B6C1DE000731FDB /* LocalizedFileMerger.swift */; };
 		42D7AB8D1B6F7D9400731FDB /* LineByLineFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB8C1B6F7D9400731FDB /* LineByLineFileReader.swift */; };
 		42D7AB8F1B6F7DC500731FDB /* RegularExpressionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -30,7 +30,7 @@
 		42D7AB741B6C1D0500731FDB /* RendezVous */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RendezVous; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D7AB771B6C1D0500731FDB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedFile.swift; sourceTree = "<group>"; };
-		42D7AB851B6C1DE000731FDB /* Merger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Merger.swift; sourceTree = "<group>"; };
+		42D7AB851B6C1DE000731FDB /* LocalizedFileMerger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedFileMerger.swift; sourceTree = "<group>"; };
 		42D7AB881B6C1EB900731FDB /* original-with-additions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "original-with-additions.txt"; sourceTree = "<group>"; };
 		42D7AB891B6C1EB900731FDB /* original-with-deletions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "original-with-deletions.txt"; sourceTree = "<group>"; };
 		42D7AB8A1B6C1EB900731FDB /* original.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = original.txt; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 				42D7AB8C1B6F7D9400731FDB /* LineByLineFileReader.swift */,
 				42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */,
 				42D7AB771B6C1D0500731FDB /* main.swift */,
-				42D7AB851B6C1DE000731FDB /* Merger.swift */,
+				42D7AB851B6C1DE000731FDB /* LocalizedFileMerger.swift */,
 				42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */,
 			);
 			path = RendezVous;
@@ -148,7 +148,7 @@
 			files = (
 				42D7AB781B6C1D0500731FDB /* main.swift in Sources */,
 				42D7AB8F1B6F7DC500731FDB /* RegularExpressionExtensions.swift in Sources */,
-				42D7AB861B6C1DE000731FDB /* Merger.swift in Sources */,
+				42D7AB861B6C1DE000731FDB /* LocalizedFileMerger.swift in Sources */,
 				42D7AB7F1B6C1D6D00731FDB /* LocalizedFile.swift in Sources */,
 				42D7AB8D1B6F7D9400731FDB /* LineByLineFileReader.swift in Sources */,
 			);
@@ -268,6 +268,7 @@
 				42D7AB7D1B6C1D0500731FDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

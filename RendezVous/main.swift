@@ -8,7 +8,7 @@
 
 import Foundation
 
-let path1 = "/Users/pedrogomes/Dropbox/Projects/RendezVous/Resources/Generated"
+let path1 = "/Users/pedrogomes/Dropbox/Projects/RendezVous/Resources/Generated-Additions"
 let path2 = "/Users/pedrogomes/Dropbox/Projects/RendezVous/Resources/Translated"
 
 findAndMerge(path1, pathForTranslatedStrings: path2)

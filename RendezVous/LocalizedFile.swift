@@ -77,19 +77,24 @@ public func >(lhs: LocalizedString, rhs: LocalizedString) -> Bool {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 public struct LocalizedFile {
-    var path: String
+    let path: String
+    let name: String
     var strings: [LocalizedString]
+    
+    private var loaded: Bool = false
     
     private var stringsByKey: [String: LocalizedString]
     
     public init(path: String) {
         self.path         = path
+        self.name         = path.lastPathComponent
         self.strings      = []
         self.stringsByKey = [String: LocalizedString]()
     }
     
     public init(url: NSURL) {
         self.path         = url.absoluteString
+        self.name         = path.lastPathComponent
         self.strings      = []
         self.stringsByKey = [String: LocalizedString]()
     }
@@ -97,6 +102,8 @@ public struct LocalizedFile {
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     public mutating func read() throws -> Bool {
+        guard self.loaded == false else { return true }
+        
         let reader = LineByLineFileReader(path: self.path)
         var line   = reader.readLine()
         
@@ -123,6 +130,8 @@ public struct LocalizedFile {
             
             self.add(LocalizedString(keyValuePair: translation!, comment: comments))
         }
+        
+        self.loaded = true
         
         return true
     }
@@ -170,6 +179,19 @@ public struct LocalizedFile {
         return Set(self.stringsByKey.keys)
     }
 
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    public func toString() -> String {
+        var lines = [String]()
+        
+        for line in self.strings {
+            lines.append((line.comment as NSArray).componentsJoinedByString("\n"))
+            lines.append("\"\(line.key)\" = \"\(line.value)\";\n")
+            lines.append("\n")
+        }
+        return (lines as NSArray).componentsJoinedByString("")
+    }
+    
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     public subscript(key: String) -> LocalizedString? {
