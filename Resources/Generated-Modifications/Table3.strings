@@ -1,0 +1,14 @@
+/* No comment provided by engineer. */
+"table3.key1" = "table1.key1";
+
+/* No comment provided by engineer. */
+"table3.key2" = "table1.key2";
+
+/* No comment provided by engineer. */
+"table3.key3" = "table1.key3";
+
+/* No comment provided by engineer. */
+"table3.key4" = "table1.key4";
+
+/* Comment table3.key5 */
+"table3.key5" = "table1.key5.change";
