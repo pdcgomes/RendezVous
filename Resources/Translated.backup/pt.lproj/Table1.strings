@@ -2,9 +2,6 @@
 "table1.key1" = "translated.table1.key1";
 
 /* No comment provided by engineer. */
-"table1.key1.0" = "table1.key1.0";
-
-/* No comment provided by engineer. */
 "table1.key2" = "translated.table1.key2";
 
 /* No comment provided by engineer. */
@@ -15,4 +12,3 @@
 
 /* No comment provided by engineer. */
 "table1.key5" = "translated.table1.key5";
-
