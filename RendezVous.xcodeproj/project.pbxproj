@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		42D7AB781B6C1D0500731FDB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB771B6C1D0500731FDB /* main.swift */; };
+		42D7AB7F1B6C1D6D00731FDB /* LocalizedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */; };
+		42D7AB861B6C1DE000731FDB /* Merger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB851B6C1DE000731FDB /* Merger.swift */; };
+		42D7AB8D1B6F7D9400731FDB /* LineByLineFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB8C1B6F7D9400731FDB /* LineByLineFileReader.swift */; };
+		42D7AB8F1B6F7DC500731FDB /* RegularExpressionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,14 @@
 /* Begin PBXFileReference section */
 		42D7AB741B6C1D0500731FDB /* RendezVous */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RendezVous; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D7AB771B6C1D0500731FDB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedFile.swift; sourceTree = "<group>"; };
+		42D7AB851B6C1DE000731FDB /* Merger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Merger.swift; sourceTree = "<group>"; };
+		42D7AB881B6C1EB900731FDB /* original-with-additions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "original-with-additions.txt"; sourceTree = "<group>"; };
+		42D7AB891B6C1EB900731FDB /* original-with-deletions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "original-with-deletions.txt"; sourceTree = "<group>"; };
+		42D7AB8A1B6C1EB900731FDB /* original.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = original.txt; sourceTree = "<group>"; };
+		42D7AB8B1B6C1EB900731FDB /* translation.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = translation.txt; sourceTree = "<group>"; };
+		42D7AB8C1B6F7D9400731FDB /* LineByLineFileReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineByLineFileReader.swift; sourceTree = "<group>"; };
+		42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +53,7 @@
 		42D7AB6B1B6C1D0500731FDB = {
 			isa = PBXGroup;
 			children = (
+				42D7AB871B6C1EB900731FDB /* Resources */,
 				42D7AB761B6C1D0500731FDB /* RendezVous */,
 				42D7AB751B6C1D0500731FDB /* Products */,
 			);
@@ -57,10 +70,25 @@
 		42D7AB761B6C1D0500731FDB /* RendezVous */ = {
 			isa = PBXGroup;
 			children = (
+				42D7AB8C1B6F7D9400731FDB /* LineByLineFileReader.swift */,
+				42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */,
 				42D7AB771B6C1D0500731FDB /* main.swift */,
+				42D7AB851B6C1DE000731FDB /* Merger.swift */,
+				42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */,
 			);
 			path = RendezVous;
 			sourceTree = "<group>";
+		};
+		42D7AB871B6C1EB900731FDB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				42D7AB881B6C1EB900731FDB /* original-with-additions.txt */,
+				42D7AB891B6C1EB900731FDB /* original-with-deletions.txt */,
+				42D7AB8A1B6C1EB900731FDB /* original.txt */,
+				42D7AB8B1B6C1EB900731FDB /* translation.txt */,
+			);
+			path = Resources;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -119,6 +147,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D7AB781B6C1D0500731FDB /* main.swift in Sources */,
+				42D7AB8F1B6F7DC500731FDB /* RegularExpressionExtensions.swift in Sources */,
+				42D7AB861B6C1DE000731FDB /* Merger.swift in Sources */,
+				42D7AB7F1B6C1D6D00731FDB /* LocalizedFile.swift in Sources */,
+				42D7AB8D1B6F7D9400731FDB /* LineByLineFileReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
