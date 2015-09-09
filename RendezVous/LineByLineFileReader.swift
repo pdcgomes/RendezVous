@@ -21,25 +21,17 @@ protocol FileReader {
 public extension NSData {
     func findRangeOfData(data: NSData) -> (Bool, NSRange) {
         
-        let range = self.rangeOfData(data, options: NSDataSearchOptions.Backwards, range: NSRange(location: 0, length: self.length))
+        var match = NSMakeRange(NSNotFound, 0)
+        var range = self.rangeOfData(data, options: NSDataSearchOptions.Backwards, range: NSRange(location: 0, length: self.length))
         
-        return (range.location != NSNotFound, range)
-        //        let bytes  = self.bytes
-        //        let length = self.length
-        //
-        //        let searchBytes  = data.bytes
-        //        let searchLength = data.length
-        //
-        //        let rangeSoFar  = NSRange(location: NSNotFound, length: 0)
-        //        let searchIndex = 0
-        //
-        //        for var i = 0; i < length; i++ {
-        //            if bytes[i] as UnsafeBufferPointer == searchBytes[searchIndex] {
-        //
-        //            }
-        //        }
-        //
-        //        return (false, nil)
+        while range.location != NSNotFound {
+            match = range
+            
+            range = self.rangeOfData(data, options: NSDataSearchOptions.Backwards, range: NSRange(location: 0, length: match.location))
+        }
+        
+        return (match.location != NSNotFound, match)
+        
     }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -113,6 +105,8 @@ final class LineByLineFileReader: FileReader {
                 readNext = false
             }
             readData.appendData(chunk)
+            
+//            print(NSString(data: readData, encoding: NSUTF8StringEncoding))
             readOffset = UInt64(Double(readOffset) + Double(chunk.length))
         }
         
