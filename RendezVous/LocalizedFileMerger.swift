@@ -69,7 +69,7 @@ func findAndMerge(pathForGeneratedStrings: String, pathForTranslatedStrings: Str
     ////////////////////////////////////////////////////////////////////////////////
     func extractPaths(files: [LocalizedFile]) -> Set<String> {
         return Set(files.map({ (file) -> String in
-            return file.path.lastPathComponent
+            return file.name
         }))
     }
 
@@ -84,9 +84,9 @@ func findAndMerge(pathForGeneratedStrings: String, pathForTranslatedStrings: Str
         createdFileCount += filesToCreateList.count
         
         for file in filesToCreateList {
-            let nameAndExtension = file.lastPathComponent
-            let createAtPath = folder.stringByAppendingPathComponent(nameAndExtension)
-            let copyFromPath = pathForGeneratedStrings.stringByAppendingPathComponent(nameAndExtension)
+            let nameAndExtension = (file as NSString).lastPathComponent
+            let createAtPath = (folder as NSString).stringByAppendingPathComponent(nameAndExtension)
+            let copyFromPath = (pathForGeneratedStrings as NSString).stringByAppendingPathComponent(nameAndExtension)
 
             do {
                 try fileManager.copyItemAtPath(copyFromPath, toPath: createAtPath)
@@ -122,7 +122,7 @@ func findAndMerge(pathForGeneratedStrings: String, pathForTranslatedStrings: Str
             }
         }
         catch {
-            
+            print("Oops, something went wrong")
         }
     }
 }
@@ -143,28 +143,50 @@ func doMergeFile(file: LocalizedFile, withFile: LocalizedFile) {
         copy.removeKey(key)
     }
     
-    for key in fromKeys {
-        let line = file[key]!
+    var createdKeys: [String] = []
+    var updatedKeys: [String] = []
+    
+    for fromKey in fromKeys {
+        let line = file[fromKey]!
         
-        if let translatedLine = copy[key] {
-            if translatedLine == line {
-                continue
+        if let translatedLine = copy[fromKey] {
+            // The key already existed, so we check for comment updates
+            if translatedLine.comment != line.comment {
+                shouldSave = true
+                copy.add(LocalizedString(key: translatedLine.key, value: translatedLine.value, comment: line.comment))
+                updatedKeys.append(translatedLine.key)
             }
-            shouldSave = true
-            copy.add(LocalizedString(key: translatedLine.key, value: translatedLine.value, comment: line.comment))
         }
         else {
             shouldSave = true
             copy.add(LocalizedString(key: line.key, value: line.value, comment: line.comment))
+            createdKeys.append(line.key)
         }
     }
     
     guard shouldSave == true else { return }
 
-    print("--> updated \(withFile.path) ...")
-
     if let unicode = copy.toString().dataUsingEncoding(NSUTF8StringEncoding) {
-        unicode.writeToFile(withFile.path, atomically: true)
+        if unicode.writeToFile(withFile.path, atomically: true) {
+            print("--> updated \(withFile.path) ...")
+            
+            func reportChanges(kind: String, keys: [String]) {
+                guard keys.count > 0 else { return }
+                
+                print("  --> \(kind):")
+
+                for key in keys {
+                    print("      \(key)")
+                }
+            }
+            
+            reportChanges("deleted", keys: Array(deletedKeys))
+            reportChanges("changed", keys: updatedKeys)
+            reportChanges("created", keys: createdKeys)
+        }
+        else {
+            print("--> failed to update \(withFile.path) ...")
+        }
     }
     
 }
@@ -174,22 +196,19 @@ func doMergeFile(file: LocalizedFile, withFile: LocalizedFile) {
 func findStringsFilesAtPath(path: String) -> [LocalizedFile] {
     var files: [LocalizedFile] = []
     
-    let fileManager = NSFileManager.defaultManager()
-    let enumerator = fileManager.enumeratorAtURL(
-        NSURL.fileURLWithPath(path, isDirectory: true),
-        includingPropertiesForKeys: [NSURLIsRegularFileKey, NSURLIsReadableKey],
-        options: []) { (url, error) -> Bool in
-            return false
-    }
-
-    if enumerator == nil { return [] }
-
-    for file in enumerator! {
-        if checkIfIsStringsFile(file as! NSURL) {
-            files.append(LocalizedFile(path: file.path))
+    let fileManager         = NSFileManager.defaultManager()
+    
+    do {
+        let contentsOfDirectory = try fileManager.contentsOfDirectoryAtURL(NSURL.fileURLWithPath(path, isDirectory: true), includingPropertiesForKeys: [NSURLIsRegularFileKey], options: [])
+        
+        for file in contentsOfDirectory {
+            if checkIfIsStringsFile(file) {
+                files.append(LocalizedFile(path: file.path!))
+            }
         }
     }
-    
+    catch {}
+
     return files
 }
 
