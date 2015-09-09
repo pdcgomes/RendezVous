@@ -44,7 +44,7 @@ So if you have a bunch of `.strings` file on `~/Projects/MyProject/GeneratedStri
 
 `rendezvous ~/Projects/MyProject/GeneratedStrings ~/Projects/MyProject/MyProject`
 
-RendezVous will execute and print out the list of files it has changed, along with the list of keys it has updated, created or deleted
+RendezVous will execute and print out the list of files it has changed, along with the list of keys it has updated, created or deleted.
 
 ### Caveats
 
@@ -52,4 +52,4 @@ RendezVous will execute and print out the list of files it has changed, along wi
 * It was effectively the first time I wrote anything remotely meaningful using Swift 
 * Why Swift? Because I wanted to
 * Am I happy with the code? No, not at all, but maybe it'll improve somewhat as I spend some more time with Swift.
-* Requires resource files to be **UTF-8 encoded**
+* Requires resource files to be **UTF-8 encoded** so you may need to convert them first - I plan on addressing this soon
