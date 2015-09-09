@@ -11,7 +11,7 @@ import Foundation
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 enum LocalizedPattern : String {
-    case KeyValuePair  = "^\"(.+)\"\\s*=\\s*\"(.+)\";$"
+    case KeyValuePair  = "^\"(.+)\"\\s*=\\s*\"(.*)\";$"
     case CommentStart  = "^/\\*.*$"
     case CommentEnd    = "^.*\\*/$"
     case CommentBlock  = "^/\\*.*\\*/$"
@@ -87,14 +87,14 @@ public struct LocalizedFile {
     
     public init(path: String) {
         self.path         = path
-        self.name         = path.lastPathComponent
+        self.name         = (path as NSString).lastPathComponent
         self.strings      = []
         self.stringsByKey = [String: LocalizedString]()
     }
     
     public init(url: NSURL) {
         self.path         = url.absoluteString
-        self.name         = path.lastPathComponent
+        self.name         = (path as NSString).lastPathComponent
         self.strings      = []
         self.stringsByKey = [String: LocalizedString]()
     }
@@ -111,10 +111,17 @@ public struct LocalizedFile {
             var comments = [line!]
             var translation: String?
             
-            if line! =~ LocalizedPattern.CommentBlock.rawValue {
+            if line! !~ LocalizedPattern.CommentBlock.rawValue {
                 line = reader.readLine()
                 while (line != nil) && (line! =~ LocalizedPattern.CommentEnd.rawValue) {
                     comments.append(line!)
+                    line = reader.readLine()
+                }
+            }
+            else {
+                line = reader.readLine()
+
+                while (line != nil) && ((line! =~ "") || (line! == "\n")) {
                     line = reader.readLine()
                 }
             }
@@ -124,11 +131,16 @@ public struct LocalizedFile {
             }
             
             line = reader.readLine()
-            while (line != nil) && (line! =~ "") {
+            while (line != nil) && ((line! =~ "") || (line! == "\n")) {
                 line = reader.readLine()
             }
             
-            self.add(LocalizedString(keyValuePair: translation!, comment: comments))
+            if translation != nil {
+                self.add(LocalizedString(keyValuePair: translation!, comment: comments))
+            }
+            else {
+                
+            }
         }
         
         self.loaded = true
