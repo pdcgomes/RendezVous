@@ -48,8 +48,8 @@ RendezVous will execute and print out the list of files it has changed, along wi
 
 ### Caveats
 
-* This tool is currently of pre-alpha quality
-* It was effectively the first time I wrote anything remotely meaningful using Swift 
+* This tool is currently of pre-alpha quality and hasn't been thoroughly tested
+* It was effectively the first time I wrote anything remotely meaningful using Swift
 * Why Swift? Because I wanted to
-* Am I happy with the code? No, not at all, but maybe it'll improve somewhat as I spend some more time with Swift.
-* Requires resource files to be **UTF-8 encoded** so you may need to convert them first - I plan on addressing this soon
+* Am I happy with the code? No, not at all, but maybe it'll improve somewhat as I spend some more time with Swift
+* Requires resource files to be **UTF-8 encoded** so you may need to convert them first. I plan on addressing this soon, but in the interim you may need to use `iconv` to conver files back and forth depending on whether you're working on a Mac or iOS app
