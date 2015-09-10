@@ -196,7 +196,7 @@ func doMergeFile(file: LocalizedFile, withFile: LocalizedFile) {
 func findStringsFilesAtPath(path: String) -> [LocalizedFile] {
     var files: [LocalizedFile] = []
     
-    let fileManager         = NSFileManager.defaultManager()
+    let fileManager = NSFileManager.defaultManager()
     
     do {
         let contentsOfDirectory = try fileManager.contentsOfDirectoryAtURL(NSURL.fileURLWithPath(path, isDirectory: true), includingPropertiesForKeys: [NSURLIsRegularFileKey], options: [])
