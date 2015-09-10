@@ -166,7 +166,7 @@ func doMergeFile(file: LocalizedFile, withFile: LocalizedFile) {
     
     guard shouldSave == true else { return }
 
-    if let unicode = copy.toString().dataUsingEncoding(NSUTF8StringEncoding) {
+    if let unicode = copy.toString().dataUsingEncoding(copy.encoding.toStringEncoding()) {
         if unicode.writeToFile(withFile.path, atomically: true) {
             print("--> updated \(withFile.path) ...")
             

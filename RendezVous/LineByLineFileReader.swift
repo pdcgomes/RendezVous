@@ -12,8 +12,8 @@ import Foundation
 ////////////////////////////////////////////////////////////////////////////////
 protocol FileReader {
     
-    init(path: String);
-    init(url: NSURL);
+    init(path: String, encoding: UInt);
+    init(url: NSURL, encoding: UInt);
     
     func read() -> Void;
 }
@@ -45,6 +45,8 @@ final class LineByLineFileReader: FileReader {
     var fileLength: UInt64
     var readOffset: UInt64
     
+    var encoding: UInt
+    
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     deinit {
@@ -53,8 +55,9 @@ final class LineByLineFileReader: FileReader {
     
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-    init(path: String) {
+    init(path: String, encoding: UInt) {
         self.path       = path
+        self.encoding   = encoding
         
         self.delimiter  = "\n"
         self.chunkSize  = 16
@@ -67,14 +70,14 @@ final class LineByLineFileReader: FileReader {
     
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-    convenience init(url: NSURL) {
-        self.init(path: url.absoluteString)
+    convenience init(url: NSURL, encoding: UInt) {
+        self.init(path: url.absoluteString, encoding: encoding)
     }
     
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-    convenience init(path: String, delimiter: String) {
-        self.init(path: path)
+    convenience init(path: String, delimiter: String, encoding: UInt) {
+        self.init(path: path, encoding: encoding)
         self.delimiter = delimiter
     }
     
@@ -87,7 +90,7 @@ final class LineByLineFileReader: FileReader {
     func readLine() -> String? {
         guard self.readOffset < self.fileLength else { return nil }
         
-        let separator = self.delimiter.dataUsingEncoding(NSUTF8StringEncoding)!
+        let separator = self.delimiter.dataUsingEncoding(self.encoding)!
         let readData  = NSMutableData()
         var readNext  = true
         
@@ -111,7 +114,7 @@ final class LineByLineFileReader: FileReader {
         }
         
         
-        if let line = NSString(data: readData, encoding: NSUTF8StringEncoding) {
+        if let line = NSString(data: readData, encoding: self.encoding) {
             return line as String
         }
         return nil

@@ -107,7 +107,7 @@ public struct LocalizedFile {
     public mutating func read() throws -> Bool {
         guard self.loaded == false else { return true }
         
-        let reader = LineByLineFileReader(path: self.path)
+        let reader = LineByLineFileReader(path: self.path, encoding: self.encoding.toStringEncoding())
         var line   = reader.readLine()
         
         while (line != nil) {
