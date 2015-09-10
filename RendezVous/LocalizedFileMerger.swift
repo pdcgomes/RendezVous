@@ -188,7 +188,6 @@ func doMergeFile(file: LocalizedFile, withFile: LocalizedFile) {
             print("--> failed to update \(withFile.path) ...")
         }
     }
-    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -197,13 +196,15 @@ func findStringsFilesAtPath(path: String) -> [LocalizedFile] {
     var files: [LocalizedFile] = []
     
     let fileManager = NSFileManager.defaultManager()
+    let detector    = FileEncodingDetector()
     
     do {
         let contentsOfDirectory = try fileManager.contentsOfDirectoryAtURL(NSURL.fileURLWithPath(path, isDirectory: true), includingPropertiesForKeys: [NSURLIsRegularFileKey], options: [])
-        
+
         for file in contentsOfDirectory {
             if checkIfIsStringsFile(file) {
-                files.append(LocalizedFile(path: file.path!))
+                let encoding = detector.detectEncodingForFileAtPath(path: file.path!)
+                files.append(LocalizedFile(path: file.path!, encoding: encoding))
             }
         }
     }

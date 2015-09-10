@@ -80,23 +80,26 @@ public struct LocalizedFile {
     let path: String
     let name: String
     var strings: [LocalizedString]
+    var encoding: FileEncoding
     
     private var loaded: Bool = false
     
     private var stringsByKey: [String: LocalizedString]
     
-    public init(path: String) {
+    public init(path: String, encoding: FileEncoding) {
         self.path         = path
         self.name         = (path as NSString).lastPathComponent
         self.strings      = []
         self.stringsByKey = [String: LocalizedString]()
+        self.encoding     = encoding
     }
     
-    public init(url: NSURL) {
+    public init(url: NSURL, encoding: FileEncoding) {
         self.path         = url.absoluteString
         self.name         = (path as NSString).lastPathComponent
         self.strings      = []
         self.stringsByKey = [String: LocalizedString]()
+        self.encoding     = encoding
     }
 
     ////////////////////////////////////////////////////////////////////////////////
