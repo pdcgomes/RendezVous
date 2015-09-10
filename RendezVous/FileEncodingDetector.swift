@@ -18,6 +18,18 @@ public enum FileEncoding : String {
     case UTF16BigEndian    = "UTF-16 Big Endian"
     case UTF16LittleEndian = "UTF-16 Little Endian"
     case Unknown           = "Unknown"
+    
+    func toStringEncoding() -> UInt {
+        switch self {
+        case .ASCII: return NSASCIIStringEncoding
+        case .UTF8:  return NSUTF8StringEncoding
+        case .UTF16: return NSUTF16StringEncoding
+        case .UTF16BigEndian: return NSUTF16BigEndianStringEncoding
+        case .UTF16LittleEndian: return NSUTF16LittleEndianStringEncoding
+        case .Unicode: return NSUnicodeStringEncoding
+        default: return 0
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
