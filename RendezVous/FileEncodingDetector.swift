@@ -10,7 +10,7 @@ import Foundation
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-enum FileEncoding : String {
+public enum FileEncoding : String {
     case ASCII             = "ASCII"
     case Unicode           = "Unicode"
     case UTF8              = "UTF-8"
@@ -73,7 +73,6 @@ final class FileEncodingDetector {
     ////////////////////////////////////////////////////////////////////////////////
     private func parseOutput(data: NSData) -> FileEncoding {
         if let str  = NSString(data: data, encoding: NSASCIIStringEncoding) {
-            print("<taskOutput = \(str)>")
             for (pattern, encoding) in self.encodingLookup {
                 if str.containsString(pattern as String) {
                     return encoding
