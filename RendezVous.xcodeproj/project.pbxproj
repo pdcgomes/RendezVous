@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		421B6A8B1BA1C172004052B7 /* FileEncodingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421B6A8A1BA1C172004052B7 /* FileEncodingDetector.swift */; settings = {ASSET_TAGS = (); }; };
 		427C1B5B1B7009EC0092DF0A /* CommandLineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C1B5A1B7009EC0092DF0A /* CommandLineParser.swift */; };
+		42C6D0BC1BA2E284007CE0AF /* StringColorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6D0BB1BA2E284007CE0AF /* StringColorizer.swift */; settings = {ASSET_TAGS = (); }; };
 		42D7AB781B6C1D0500731FDB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB771B6C1D0500731FDB /* main.swift */; };
 		42D7AB7F1B6C1D6D00731FDB /* LocalizedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */; };
 		42D7AB861B6C1DE000731FDB /* LocalizedFileMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB851B6C1DE000731FDB /* LocalizedFileMerger.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		421B6A8A1BA1C172004052B7 /* FileEncodingDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileEncodingDetector.swift; sourceTree = "<group>"; };
 		427C1B5A1B7009EC0092DF0A /* CommandLineParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineParser.swift; sourceTree = "<group>"; };
+		42C6D0BB1BA2E284007CE0AF /* StringColorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringColorizer.swift; sourceTree = "<group>"; };
 		42D7AB741B6C1D0500731FDB /* rendezvous */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rendezvous; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D7AB771B6C1D0500731FDB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedFile.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				42D7AB851B6C1DE000731FDB /* LocalizedFileMerger.swift */,
 				42D7AB771B6C1D0500731FDB /* main.swift */,
 				42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */,
+				42C6D0BB1BA2E284007CE0AF /* StringColorizer.swift */,
 			);
 			path = RendezVous;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C6D0BC1BA2E284007CE0AF /* StringColorizer.swift in Sources */,
 				427C1B5B1B7009EC0092DF0A /* CommandLineParser.swift in Sources */,
 				42D7AB781B6C1D0500731FDB /* main.swift in Sources */,
 				42D7AB8F1B6F7DC500731FDB /* RegularExpressionExtensions.swift in Sources */,
