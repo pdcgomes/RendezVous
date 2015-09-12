@@ -10,7 +10,7 @@ import Foundation
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-public enum AnsiColorCode : UInt {
+public enum AnsiColorCode : UInt, CustomStringConvertible {
     case Black   = 0
     case Red     = 1
     case Green   = 2
@@ -47,6 +47,20 @@ public enum AnsiColorCode : UInt {
         default: return nil
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    static func values() -> [AnsiColorCode] {
+        var values = [AnsiColorCode]()
+        
+        for v: UInt in 0...7 {
+            if let enumValue = AnsiColorCode(rawValue: v) {
+                values.append(enumValue)
+            }
+        }
+
+        return values
+    }
     
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
@@ -68,11 +82,27 @@ public enum AnsiColorCode : UInt {
     func backgroundColor() -> UInt {
         return self.rawValue + 40
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    public var description: String {
+        switch self {
+            case Black:     return "Black"
+            case Red:       return "Red"
+            case Green:     return "Green"
+            case Yellow:    return "Yellow"
+            case Blue:      return "Blue"
+            case Magenta:   return "Magenta"
+            case Cyan:      return "Cyan"
+            case White:     return "White"
+            case Default:   return ""
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-public enum AnsiModeCode : UInt {
+public enum AnsiModeCode : UInt, CustomStringConvertible {
     case Default   = 0
     case Bold      = 1
     case Italic    = 3
@@ -80,6 +110,34 @@ public enum AnsiModeCode : UInt {
     case Inverse   = 7
     case Hide      = 8
     case Strike    = 9
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    static func values() -> [AnsiModeCode] {
+        var values = [AnsiModeCode]()
+        
+        for v: UInt in 0...9 {
+            if let enumValue = AnsiModeCode(rawValue: v) {
+                values.append(enumValue)
+            }
+        }
+        
+        return values
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    public var description: String {
+        switch self {
+            case Bold:      return "Bold"
+            case Italic:    return "Italic"
+            case Underline: return "Underline"
+            case Inverse:   return "Inverse"
+            case Hide:      return "Hide"
+            case Strike:    return "Strikethrough"
+            case Default:   return ""
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -138,11 +196,21 @@ public extension String {
 
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-    public func printColorSamples() -> Void {
-        let textColor       = ""
-        let backgroundColor = ""
+    public static func printColorSamples() -> Void {
+        let colorCodes = AnsiColorCode.values()
         
-        print("\(textColor) on \(backgroundColor)")
+        let maxLen = colorCodes.map { (code) in
+            return code.description.characters.count
+        }.sort().last
+        
+        for f in colorCodes {
+            for b in colorCodes {
+                let foreground = f.description.leftJustify(maxLen! + 1)
+                let background = b.description.leftJustify(maxLen! + 1)
+                
+                print("\(foreground) on \(background)".colorize(f, background: b))
+            }
+        }
     }
     
     ////////////////////////////////////////////////////////////////////////////////
@@ -205,4 +273,41 @@ public extension String {
     var    italic: String { return self.colorize(mode: .Italic)   }
     var   inverse: String { return self.colorize(mode: .Inverse)  }
     var    strike: String { return self.colorize(mode: .Strike)   }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+public extension String {
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    func leftJustify(padding: Int) -> String {
+        if self.characters.count >= padding {
+            return self
+        }
+        
+        var justifiedStr = self
+        
+        for _ in 0..<(padding - self.characters.count) {
+            justifiedStr.appendContentsOf(" ")
+        }
+        
+        return justifiedStr
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    func rightJustify(padding: Int) -> String {
+        if self.characters.count >= padding {
+            return self
+        }
+        var justifiedStr = ""
+        
+        for _ in 0..<(padding - self.characters.count) {
+            justifiedStr.appendContentsOf(" ")
+        }
+        justifiedStr.appendContentsOf(self)
+        
+        return justifiedStr
+    }
 }
