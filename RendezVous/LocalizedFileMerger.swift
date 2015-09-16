@@ -190,15 +190,12 @@ class LocalizedFileMerger {
         
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
-        guard let unicode = copy.toString().dataUsingEncoding(copy.encoding.toStringEncoding()) else {
-            tracker.trackError(withFile.path, error: NSError(domain: "", code: 1000, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Failed to encode file", comment: "")]))
-            return false
+        do {
+            try copy.toString().writeToFile(withFile.path, atomically: true, encoding: withFile.encoding.toStringEncoding())
         }
-        
-        let success = unicode.writeToFile(withFile.path, atomically: true)
-        guard success == true else {
+        catch {
             tracker.trackError(withFile.path, error: NSError(domain: "", code: 1010, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Failed to save file", comment: "")]))
-            return false
+            
         }
 
         return true;
