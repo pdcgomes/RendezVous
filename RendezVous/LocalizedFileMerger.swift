@@ -128,9 +128,9 @@ class LocalizedFileMerger {
                     }
                 }
                 
-                for n in 0..<mergeWithFiles.count {
-                    try mergeWithFiles[n].read()
-                    doMergeFile(file, withFile: mergeWithFiles[n])
+                for var mergeToFile in mergeWithFiles {
+                    try mergeToFile.read()
+                    doMergeFile(file, withFile: mergeToFile)
                 }
             }
             catch {
