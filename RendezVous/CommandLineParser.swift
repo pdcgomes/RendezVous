@@ -12,6 +12,8 @@ import Foundation
 ////////////////////////////////////////////////////////////////////////////////
 public class CommandLineParser {
 
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
     public func runWithArguments(arguments: [String]) -> Bool {
         
         guard validateArguments(arguments) else { return false }
@@ -19,24 +21,44 @@ public class CommandLineParser {
         return true
     }
     
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
     public func printUsage() {
-        let doc : String = "RendezVous, a simple .strings merger by Pedro Gomes (c) 2015\n" +
+        let doc : String =
+            "RendezVous, a simple .strings merger by Pedro Gomes (c) 2015\n" +
             "\n" +
             "Usage:\n" +
-            "  rendezvous <generated_dir> <translations_dir>\n" +
+            "   rendezvous [OPTIONS] <generated_dir> <translations_dir>\n" +
             "\n" +
             "Examples:\n" +
-            "  rendezvous ~/Projects/MyProject/GeneratedStrings ~/Projects/MyProject/Translations\n"
+            "   rendezvous --reporter json ~/Projects/MyProject/GeneratedStrings ~/Projects/MyProject/Translations\n" +
+            "\n" +
+            "Options:\n" +
+            "   -r, --reporter TYPE\n\n" +
+            "Reporters:\n" +
+            "   json\n" +
+            "   pretty (default)\n"
         print(doc)
     }
     
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
     private func validateArguments(arguments: [String]) -> Bool {
         guard arguments.count == 2 else { return false }
         
-        guard checkDirectoryExists(arguments[0]) else { return false }
-        guard checkDirectoryExists(arguments[1]) else { return false }
+        let tracker = ChangeTracker()
+        let merger = LocalizedFileMerger(tracker: tracker)
         
-        findAndMerge(arguments[0], pathForTranslatedStrings: arguments[1])
+        guard merger.checkDirectoryExists(arguments[0]) else { return false }
+        guard merger.checkDirectoryExists(arguments[1]) else { return false }
+        
+        let result = merger.findAndMerge(arguments[0], pathForTranslatedStrings: arguments[1])
+        
+        if result {
+            let reporter = ChangeReportStandardOutputRenderer()
+//            let reporter = ChangeReportJSONRender()
+            reporter.render(tracker.changes, errors: tracker.errors)
+        }
         
         return true
     }
