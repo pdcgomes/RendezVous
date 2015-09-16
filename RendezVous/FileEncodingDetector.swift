@@ -24,8 +24,8 @@ public enum FileEncoding : String {
         case .ASCII: return NSASCIIStringEncoding
         case .UTF8:  return NSUTF8StringEncoding
         case .UTF16: return NSUTF16StringEncoding
-        case .UTF16BigEndian: return NSUTF16BigEndianStringEncoding
-        case .UTF16LittleEndian: return NSUTF16LittleEndianStringEncoding
+        case .UTF16BigEndian: return NSUTF16StringEncoding
+        case .UTF16LittleEndian: return NSUTF16StringEncoding
         case .Unicode: return NSUnicodeStringEncoding
         default: return 0
         }
