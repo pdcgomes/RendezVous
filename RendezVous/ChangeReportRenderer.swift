@@ -19,6 +19,8 @@ enum ChangeReportGroupingStyle {
 ////////////////////////////////////////////////////////////////////////////////
 protocol ChangeReportRenderer {
     
+    init()
+    
     func render(changes: [String: [Change]], errors: [String: ErrorType]?, groupBy: ChangeReportGroupingStyle);
     
     func findChangesByType(type: Change.ChangeType, changes: [Change]) -> [Change]
