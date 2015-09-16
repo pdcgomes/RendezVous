@@ -197,16 +197,14 @@ public extension String {
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     public static func printColorSamples() -> Void {
-        let colorCodes = AnsiColorCode.values()
-        
-        let maxLen = colorCodes.map { (code) in
-            return code.description.characters.count
-        }.sort().last
+        let colorCodes = AnsiColorCode.values().map { $0 }
+        let maxLen     = Int(colorCodes.reduce(0) {
+            return $1.description.characters.count > $0 ? $1.description.characters.count : $0 })
         
         for f in colorCodes {
             for b in colorCodes {
-                let foreground = f.description.leftJustify(maxLen! + 1)
-                let background = b.description.leftJustify(maxLen! + 1)
+                let foreground = f.description.leftJustify(maxLen + 1)
+                let background = b.description.leftJustify(maxLen + 1)
                 
                 print("\(foreground) on \(background)".colorize(f, background: b))
             }
