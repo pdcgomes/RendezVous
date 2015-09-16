@@ -36,8 +36,8 @@ public class CommandLineParser {
             "Options:\n" +
             "   -r, --reporter TYPE\n\n" +
             "Reporters:\n" +
-            "   json\n" +
-            "   pretty (default)\n"
+            "   json (default)\n" +
+            "   pretty\n"
         print(doc)
     }
     
@@ -55,8 +55,8 @@ public class CommandLineParser {
         let result = merger.findAndMerge(arguments[0], pathForTranslatedStrings: arguments[1])
         
         if result {
-            let reporter = ChangeReportStandardOutputRenderer()
-//            let reporter = ChangeReportJSONRender()
+//            let reporter = ChangeReportStandardOutputRenderer()
+            let reporter = ChangeReportJSONRender()
             reporter.render(tracker.changes, errors: tracker.errors)
         }
         

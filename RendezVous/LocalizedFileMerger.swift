@@ -127,7 +127,7 @@ class LocalizedFileMerger {
                         mergeWithFiles.append(match)
                     }
                 }
-                
+
                 for var mergeToFile in mergeWithFiles {
                     try mergeToFile.read()
                     doMergeFile(file, withFile: mergeToFile)
