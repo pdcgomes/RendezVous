@@ -154,7 +154,7 @@ class LocalizedFileMerger {
         
         for key in deletedKeys {
             copy.removeKey(key)
-            tracker.trackChange(file.path, change: Change(type: .Deleted, key: key))
+            tracker.trackChange(withFile.path, change: Change(type: .Deleted, key: key))
         }
         
         var createdKeys: [String] = []
@@ -170,7 +170,7 @@ class LocalizedFileMerger {
                     copy.add(LocalizedString(key: translatedLine.key, value: translatedLine.value, comment: line.comment))
                     updatedKeys.append(translatedLine.key)
                     
-                    tracker.trackChange(file.path, change: Change(
+                    tracker.trackChange(withFile.path, change: Change(
                         type: .Changed,
                         key: line.key,
                         newValue: line.comment.joinWithSeparator("")))
@@ -181,7 +181,7 @@ class LocalizedFileMerger {
                 copy.add(LocalizedString(key: line.key, value: line.value, comment: line.comment))
                 createdKeys.append(line.key)
                 tracker.trackChange(
-                    file.path,
+                    withFile.path,
                     change: Change(type: .Created, key: line.key, newValue: line.value))
             }
         }
