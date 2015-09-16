@@ -70,9 +70,9 @@ class ChangeReportJSONRender : ChangeReportRenderer {
         
         do {
             let data   = try NSJSONSerialization.dataWithJSONObject(report, options: [.PrettyPrinted])
-            let string = NSString(data: data, encoding: NSUTF8StringEncoding)
-            
-            print(string)
+            if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
+                print(string)
+            }
         }
         catch {}
     }
