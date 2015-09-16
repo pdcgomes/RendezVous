@@ -88,6 +88,9 @@ public class ChangeTracker {
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     public func trackChange(file: String, change: Change) {
+        if changes[file] == nil {
+            changes[file] = []
+        }
         changes[file]?.append(change)
     }
     
