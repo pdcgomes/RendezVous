@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		421B6A8B1BA1C172004052B7 /* FileEncodingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421B6A8A1BA1C172004052B7 /* FileEncodingDetector.swift */; settings = {ASSET_TAGS = (); }; };
 		427C1B5B1B7009EC0092DF0A /* CommandLineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C1B5A1B7009EC0092DF0A /* CommandLineParser.swift */; };
+		427FC3DC1BA89BD100F0A470 /* ChangeReportStandardOutputRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427FC3DB1BA89BD100F0A470 /* ChangeReportStandardOutputRenderer.swift */; settings = {ASSET_TAGS = (); }; };
+		427FC3E11BA9B04100F0A470 /* ChangeReportJSONRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427FC3E01BA9B04100F0A470 /* ChangeReportJSONRenderer.swift */; settings = {ASSET_TAGS = (); }; };
+		42BCA4401BA8748000ADBD25 /* ChangeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCA43F1BA8748000ADBD25 /* ChangeTracker.swift */; settings = {ASSET_TAGS = (); }; };
+		42BCA4421BA8748F00ADBD25 /* ChangeReportRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCA4411BA8748F00ADBD25 /* ChangeReportRenderer.swift */; settings = {ASSET_TAGS = (); }; };
 		42C6D0BC1BA2E284007CE0AF /* StringColorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6D0BB1BA2E284007CE0AF /* StringColorizer.swift */; settings = {ASSET_TAGS = (); }; };
 		42D7AB781B6C1D0500731FDB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB771B6C1D0500731FDB /* main.swift */; };
 		42D7AB7F1B6C1D6D00731FDB /* LocalizedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */; };
@@ -32,6 +36,10 @@
 /* Begin PBXFileReference section */
 		421B6A8A1BA1C172004052B7 /* FileEncodingDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileEncodingDetector.swift; sourceTree = "<group>"; };
 		427C1B5A1B7009EC0092DF0A /* CommandLineParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineParser.swift; sourceTree = "<group>"; };
+		427FC3DB1BA89BD100F0A470 /* ChangeReportStandardOutputRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeReportStandardOutputRenderer.swift; sourceTree = "<group>"; };
+		427FC3E01BA9B04100F0A470 /* ChangeReportJSONRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeReportJSONRenderer.swift; sourceTree = "<group>"; };
+		42BCA43F1BA8748000ADBD25 /* ChangeTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTracker.swift; sourceTree = "<group>"; };
+		42BCA4411BA8748F00ADBD25 /* ChangeReportRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeReportRenderer.swift; sourceTree = "<group>"; };
 		42C6D0BB1BA2E284007CE0AF /* StringColorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringColorizer.swift; sourceTree = "<group>"; };
 		42D7AB741B6C1D0500731FDB /* rendezvous */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rendezvous; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D7AB771B6C1D0500731FDB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -59,6 +67,37 @@
 			path = Vendor;
 			sourceTree = "<group>";
 		};
+		427FC3DD1BA9AFB900F0A470 /* Reporter */ = {
+			isa = PBXGroup;
+			children = (
+				42BCA4411BA8748F00ADBD25 /* ChangeReportRenderer.swift */,
+				427FC3DB1BA89BD100F0A470 /* ChangeReportStandardOutputRenderer.swift */,
+				427FC3E01BA9B04100F0A470 /* ChangeReportJSONRenderer.swift */,
+			);
+			name = Reporter;
+			sourceTree = "<group>";
+		};
+		427FC3DE1BA9AFD600F0A470 /* Merger */ = {
+			isa = PBXGroup;
+			children = (
+				42BCA43F1BA8748000ADBD25 /* ChangeTracker.swift */,
+				42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */,
+				42D7AB851B6C1DE000731FDB /* LocalizedFileMerger.swift */,
+			);
+			name = Merger;
+			sourceTree = "<group>";
+		};
+		427FC3DF1BA9AFE900F0A470 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				421B6A8A1BA1C172004052B7 /* FileEncodingDetector.swift */,
+				42D7AB8C1B6F7D9400731FDB /* LineByLineFileReader.swift */,
+				42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */,
+				42C6D0BB1BA2E284007CE0AF /* StringColorizer.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		42D7AB6B1B6C1D0500731FDB = {
 			isa = PBXGroup;
 			children = (
@@ -80,14 +119,11 @@
 		42D7AB761B6C1D0500731FDB /* RendezVous */ = {
 			isa = PBXGroup;
 			children = (
+				427FC3DE1BA9AFD600F0A470 /* Merger */,
+				427FC3DD1BA9AFB900F0A470 /* Reporter */,
+				427FC3DF1BA9AFE900F0A470 /* Utils */,
 				427C1B5A1B7009EC0092DF0A /* CommandLineParser.swift */,
-				421B6A8A1BA1C172004052B7 /* FileEncodingDetector.swift */,
-				42D7AB8C1B6F7D9400731FDB /* LineByLineFileReader.swift */,
-				42D7AB7E1B6C1D6D00731FDB /* LocalizedFile.swift */,
-				42D7AB851B6C1DE000731FDB /* LocalizedFileMerger.swift */,
 				42D7AB771B6C1D0500731FDB /* main.swift */,
-				42D7AB8E1B6F7DC500731FDB /* RegularExpressionExtensions.swift */,
-				42C6D0BB1BA2E284007CE0AF /* StringColorizer.swift */,
 			);
 			path = RendezVous;
 			sourceTree = "<group>";
@@ -156,11 +192,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42BCA4421BA8748F00ADBD25 /* ChangeReportRenderer.swift in Sources */,
+				42BCA4401BA8748000ADBD25 /* ChangeTracker.swift in Sources */,
 				42C6D0BC1BA2E284007CE0AF /* StringColorizer.swift in Sources */,
 				427C1B5B1B7009EC0092DF0A /* CommandLineParser.swift in Sources */,
 				42D7AB781B6C1D0500731FDB /* main.swift in Sources */,
+				427FC3DC1BA89BD100F0A470 /* ChangeReportStandardOutputRenderer.swift in Sources */,
 				42D7AB8F1B6F7DC500731FDB /* RegularExpressionExtensions.swift in Sources */,
 				42D7AB861B6C1DE000731FDB /* LocalizedFileMerger.swift in Sources */,
+				427FC3E11BA9B04100F0A470 /* ChangeReportJSONRenderer.swift in Sources */,
 				421B6A8B1BA1C172004052B7 /* FileEncodingDetector.swift in Sources */,
 				42D7AB7F1B6C1D6D00731FDB /* LocalizedFile.swift in Sources */,
 				42D7AB8D1B6F7D9400731FDB /* LineByLineFileReader.swift in Sources */,
