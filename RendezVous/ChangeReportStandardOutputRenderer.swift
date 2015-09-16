@@ -102,9 +102,7 @@ struct ChangeReportStandardOutputRenderer : ChangeReportRenderer {
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         func extractChangesByType(type: Change.ChangeType, changeList: [Change]) -> [Change] {
-            return changeList.filter({ (change) -> Bool in
-                return change.type == type
-            })
+            return changeList.filter { $0.type == type }
         }
         
         ////////////////////////////////////////////////////////////////////////////////
