@@ -110,10 +110,8 @@ class LocalizedFileMerger {
         
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
-        for i in 0..<generated.count {
+        for var file in generated {
             do {
-                var file = generated[i]
-                
                 try file.read()
                 
                 var mergeWithFiles = [LocalizedFile]()
